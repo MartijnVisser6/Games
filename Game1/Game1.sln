@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1\Game1.csproj", "{B54659FB-05A2-4BE2-BA8C-8A9AFB42E7DF}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Game1Content", "Game1\Game1Content\Game1Content.contentproj", "{21CE8842-F8AB-4123-8700-E2229780473C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1Content", "Game1\Game1Content\Game1Content.contentproj", "{21CE8842-F8AB-4123-8700-E2229780473C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "GameEngine\GameEngine.csproj", "{82495041-6D88-4DDB-AAB3-88A63E3C823B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{B54659FB-05A2-4BE2-BA8C-8A9AFB42E7DF}.Release|x86.Build.0 = Release|x86
 		{21CE8842-F8AB-4123-8700-E2229780473C}.Debug|x86.ActiveCfg = Debug|x86
 		{21CE8842-F8AB-4123-8700-E2229780473C}.Release|x86.ActiveCfg = Release|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Debug|x86.ActiveCfg = Debug|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Debug|x86.Build.0 = Debug|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.ActiveCfg = Release|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

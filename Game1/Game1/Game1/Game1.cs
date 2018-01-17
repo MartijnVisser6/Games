@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameEngine;
 
 namespace Game1
 {
@@ -18,11 +19,20 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        Player player;
+        FinishPoint finish;
+        bool winner;
+        SpriteFont font;
+        List<Wall> walls = new List<Wall>();
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
+            ContentLoader.Content = Content;
+                    
         }
 
         /// <summary>
@@ -46,6 +56,16 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("SpriteFont1");
+            player = new Player(new Vector2(200, 111));
+            finish = new FinishPoint(new Vector2(900, 900));
+            
+            for(int i =0; i < 10; i++)
+            {
+                walls.Add(new Wall(new Vector2(200 + i * 16, 500)));
+            }
+
+            //square = Content.Load<Texture2D>("square");
 
             // TODO: use this.Content to load your game content here
         }
@@ -69,7 +89,14 @@ namespace Game1
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            player.Update(gameTime,walls);
 
+            if (player.CheckCollision(finish))
+                winner = true;
+
+            HandleInput(gameTime, walls);
+
+            //squarePosition += new Vector2(1, 0); moves square
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -81,11 +108,73 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.Green);
+
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
+            finish.Draw(spriteBatch);
+
+            foreach (Wall wall in walls)
+                wall.Draw(spriteBatch);           
+
+            if (winner)
+                spriteBatch.DrawString(font, "You've won!", new Vector2(500, 500), Color.White);
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
+
+        private void HandleInput(GameTime gameTime, List<Wall> walls)
+        {
+            int mvSpeed = 3;
+
+            float multiplier = 60 * gameTime.ElapsedGameTime.Milliseconds / 1000.0f; //Keeping gametime consistency for movement speed.
+
+            KeyboardState ks = Keyboard.GetState();
+
+            Vector2 prevPosition = player.Position;
+
+            if (ks.IsKeyDown(Keys.W))
+            {
+                player.Position += new Vector2(0, -mvSpeed * multiplier);
+            }
+            if (ks.IsKeyDown(Keys.S))
+            {
+                player.Position += new Vector2(0, mvSpeed * multiplier);
+            }           
+
+            foreach (Wall wall in walls)
+            {
+                if (player.CheckCollision(wall))
+                {
+                    player.Position = prevPosition;
+                    break;
+                }
+            }
+
+            prevPosition = player.Position;
+
+            if (ks.IsKeyDown(Keys.A))
+            {
+                player.Position += new Vector2(-mvSpeed * multiplier, 0);
+            }
+            if (ks.IsKeyDown(Keys.D))
+            {
+                player.Position += new Vector2(mvSpeed * multiplier, 0);
+            }
+
+            foreach (Wall wall in walls)
+            {
+                if (player.CheckCollision(wall))
+                {
+                    player.Position = prevPosition;
+                    break;
+                }
+            }
+        }
+
+
     }
 }

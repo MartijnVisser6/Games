@@ -22,14 +22,15 @@ namespace Game1
         Player player;
         bool winner;
         SpriteFont font;
+        PlayerBase playerBase;
         List<Wall> walls = new List<Wall>();
         List<Bullet> bullets = new List<Bullet>();
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1000;
-            graphics.PreferredBackBufferHeight = 1000;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 1024;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             ContentLoader.Content = Content;
@@ -58,14 +59,11 @@ namespace Game1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("SpriteFont1");
-            player = new Player(new Vector2(200, 111));
+            player = new Player(new Vector2(560, 560));
+            playerBase = new PlayerBase(new Vector2(512, 512));
             
             
-            for(int i =0; i < 10; i++)
-            {
-                walls.Add(new Wall(new Vector2(200 + i * 16, 500)));
-            }
-
+            
             //square = Content.Load<Texture2D>("square");
 
             // TODO: use this.Content to load your game content here
@@ -111,9 +109,8 @@ namespace Game1
 
             spriteBatch.Begin();
             player.Draw(spriteBatch);
-
-            foreach (Wall wall in walls)
-                wall.Draw(spriteBatch);           
+            playerBase.Draw(spriteBatch);
+      
 
             if (winner)
                 spriteBatch.DrawString(font, "You've won!", new Vector2(500, 500), Color.White);
@@ -145,7 +142,7 @@ namespace Game1
 
             foreach (Wall wall in walls)
             {
-                if (player.CheckCollision(wall))
+                if (player.CheckCollision(playerBase))
                 {
                     player.Position = prevPosition;
                     break;
@@ -163,12 +160,10 @@ namespace Game1
                 player.Position += new Vector2(mvSpeed * multiplier, 0);
             }
 
-            foreach (Wall wall in walls)
-            {
-                if (player.CheckCollision(wall))
+            if (player.CheckCollision(playerBase))
                 {
                     player.Position = prevPosition;
-                    break;
+
                 }
             }
 

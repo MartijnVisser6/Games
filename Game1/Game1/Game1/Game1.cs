@@ -90,6 +90,8 @@ namespace Game1
                 this.Exit();
             player.Update(gameTime,walls);
 
+            foreach (Bullet bullet in bullets)
+                bullet.Update(gameTime);
 
             HandleInput(gameTime, walls);
 
@@ -110,7 +112,9 @@ namespace Game1
             spriteBatch.Begin();
             player.Draw(spriteBatch);
             playerBase.Draw(spriteBatch);
-      
+
+            foreach (Bullet bullet in bullets)
+                bullet.Draw(spriteBatch);
 
             if (winner)
                 spriteBatch.DrawString(font, "You've won!", new Vector2(500, 500), Color.White);
@@ -161,6 +165,7 @@ namespace Game1
             }
 
             if (player.CheckCollision(playerBase))
+            { 
                 {
                     player.Position = prevPosition;
 
@@ -174,7 +179,9 @@ namespace Game1
             {
                 Vector2 direction = (new Vector2(mouseState.X, mouseState.Y) - player.Position);
                 direction.Normalize();
-                bullets.Add(new Bullet(player.Position + new Vector2(8, 8)) { Velocity = direction * 2});
+                Bullet bullet = new Bullet(player.Position + new Vector2(8, 8));
+                bullet.Velocity = direction;
+                bullets.Add(bullet);
             }
         }
 

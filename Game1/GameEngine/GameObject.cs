@@ -27,7 +27,7 @@ namespace GameEngine
 
         public virtual void Update(GameTime gameTime)
         {
-            Position += Velocity * ((gameTime.ElapsedGameTime.Milliseconds / 1000) * 60);
+            Position += Velocity * ((gameTime.ElapsedGameTime.Milliseconds / 1000.0f) * 60);
         }
 
         public void Draw(SpriteBatch spriteBatch)

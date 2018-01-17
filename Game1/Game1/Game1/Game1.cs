@@ -20,7 +20,6 @@ namespace Game1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
-        FinishPoint finish;
         bool winner;
         SpriteFont font;
         List<Wall> walls = new List<Wall>();
@@ -58,7 +57,7 @@ namespace Game1
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("SpriteFont1");
             player = new Player(new Vector2(200, 111));
-            finish = new FinishPoint(new Vector2(900, 900));
+            
             
             for(int i =0; i < 10; i++)
             {
@@ -91,8 +90,6 @@ namespace Game1
                 this.Exit();
             player.Update(gameTime,walls);
 
-            if (player.CheckCollision(finish))
-                winner = true;
 
             HandleInput(gameTime, walls);
 
@@ -112,7 +109,6 @@ namespace Game1
 
             spriteBatch.Begin();
             player.Draw(spriteBatch);
-            finish.Draw(spriteBatch);
 
             foreach (Wall wall in walls)
                 wall.Draw(spriteBatch);           

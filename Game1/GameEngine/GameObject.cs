@@ -14,7 +14,7 @@ namespace GameEngine
     public class GameObject
     {
         public Vector2 Position { get; set; }
-      
+        public Vector2 Velocity { get; set; }
         private Texture2D _mTexture;
 
 
@@ -27,7 +27,7 @@ namespace GameEngine
 
         public virtual void Update(GameTime gameTime)
         {
-
+            Position += Velocity * ((gameTime.ElapsedGameTime.Milliseconds / 1000) * 60);
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -23,6 +23,8 @@ namespace Game1
         bool winner;
         SpriteFont font;
         List<Wall> walls = new List<Wall>();
+        List<Bullet> bullets = new List<Bullet>();
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -105,7 +107,7 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
             player.Draw(spriteBatch);
@@ -168,6 +170,16 @@ namespace Game1
                     player.Position = prevPosition;
                     break;
                 }
+            }
+
+            // Handle shooting
+
+            MouseState mouseState = Mouse.GetState();
+            if(mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Vector2 direction = (new Vector2(mouseState.X, mouseState.Y) - player.Position);
+                direction.Normalize();
+                bullets.Add(new Bullet(player.Position + new Vector2(8, 8)) { Velocity = direction * 2});
             }
         }
 

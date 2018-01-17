@@ -1,0 +1,15 @@
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Game1.exe
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Game1.pdb
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.dll
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Game.dll
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.GamerServices.dll
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Input.Touch.dll
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.xml
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Game.xml
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\bin\x86\Release\Microsoft.Xna.Framework.Input.Touch.xml
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\obj\x86\Release\Game1.exe
+C:\Users\martijn\Desktop\Games\Game1\Game1\Game1\obj\x86\Release\Game1.pdb

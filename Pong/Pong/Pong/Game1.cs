@@ -20,6 +20,7 @@ namespace Pong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Bat player1, player2;
+        Ball ball;
 
         public Game1()
         {
@@ -37,8 +38,10 @@ namespace Pong
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ContentLoader.Content = Content;
-            player1 = new Bat(new Vector2(0, 300));
-            player2 = new Bat(new Vector2(768, 300));
+            player1 = new Bat(new Vector2(0, 176));
+            player2 = new Bat(new Vector2(768, 176));
+            ball = new Ball(new Vector2(392, 232));
+            ball.Velocity = new Vector2(5, 5);
         }
       
         protected override void Update(GameTime gameTime)
@@ -50,6 +53,7 @@ namespace Pong
             player1.Update(gameTime);
             player2.Update(gameTime);
             MoveBats();
+            ball.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -61,6 +65,7 @@ namespace Pong
             spriteBatch.Begin();
             player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
+            ball.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -77,6 +82,15 @@ namespace Pong
                 player1.Position += new Vector2(0, 3);
             }
 
+            if(player1.Position.Y < 0)
+            {
+                player1.Position += new Vector2(0, -player1.Position.Y);
+            }
+            else if(player1.Position.Y > 352)
+            {
+                player1.Position += new Vector2(0, 352 - player1.Position.Y);
+            }
+
             if (ks.IsKeyDown(Keys.Up))
             {
                 player2.Position += new Vector2(0, -3);
@@ -85,6 +99,17 @@ namespace Pong
             {
                 player2.Position += new Vector2(0, 3);
             }
+
+            if (player2.Position.Y < 0)
+            {
+                player2.Position += new Vector2(0, -player2.Position.Y);
+            }
+            else if (player2.Position.Y > 352)
+            {
+                player2.Position += new Vector2(0, 352 - player2.Position.Y);
+            }
+
+
         }
     }
 }

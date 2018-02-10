@@ -1,1 +1,2 @@
 C:\Users\martijn\Desktop\Games\Pong\Pong\PongContent\obj\x86\Debug\PongContent.contentprojResolveAssemblyReference.cache
+D:\GamesWithBosk\Games\Pong\Pong\PongContent\obj\x86\Debug\PongContent.contentprojResolveAssemblyReference.cache

@@ -20,12 +20,16 @@ namespace Pong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Bat player1, player2;
-        Ball ball;
+        List<Ball> balls;
+        Random random;
+        SpriteFont font;
+        int player1Score, player2Score;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            random = new Random();
         }
 
         protected override void Initialize()
@@ -40,8 +44,14 @@ namespace Pong
             ContentLoader.Content = Content;
             player1 = new Bat(new Vector2(0, 176));
             player2 = new Bat(new Vector2(768, 176));
-            ball = new Ball(new Vector2(392, 232));
-            ball.Velocity = new Vector2(5, 5);
+            balls = new List<Ball>();
+            for (int i = 0; i < 10; i++)
+            {
+                balls.Add(new Ball(new Vector2(392, 232)));
+            }
+            font = Content.Load<SpriteFont>("font");
+            foreach (Ball ball in balls)
+                BallReset(ball);
         }
       
         protected override void Update(GameTime gameTime)
@@ -53,7 +63,11 @@ namespace Pong
             player1.Update(gameTime);
             player2.Update(gameTime);
             MoveBats();
-            ball.Update(gameTime);
+
+            foreach(Ball ball in balls)
+                ball.Update(gameTime);
+
+            MoveBall();
             base.Update(gameTime);
         }
 
@@ -65,7 +79,11 @@ namespace Pong
             spriteBatch.Begin();
             player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
-            ball.Draw(spriteBatch);
+
+            foreach (Ball ball in balls)
+                ball.Draw(spriteBatch);
+
+            DrawScore();
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -110,6 +128,55 @@ namespace Pong
             }
 
 
+        }
+
+        private void MoveBall()
+        {
+            foreach (Ball ball in balls)
+            {
+                if (ball.Position.Y <= 0 || ball.Position.Y >= 464)
+                {
+                    ball.Velocity *= new Vector2(1, -1);
+                }
+
+                if (ball.CheckCollision(player1)) 
+                {
+                    ball.Velocity *= new Vector2(-1.1f, 1.1f);
+                    float yDiff = ball.Position.Y - player1.Position.Y - 64;
+                    ball.Velocity += new Vector2(0, yDiff / 32.0f);
+                }
+
+                if(ball.CheckCollision(player2))
+                {
+                    ball.Velocity *= new Vector2(-1.1f, 1.1f);
+                    float yDiff = ball.Position.Y - player2.Position.Y - 64;
+                    ball.Velocity += new Vector2(0, yDiff / 32.0f);
+                }
+
+                if (ball.Position.X <= -16)
+                {
+                    BallReset(ball);
+                    player2Score++;
+
+                }
+                else if (ball.Position.X >= 800)
+                {
+                    BallReset(ball);
+                    player1Score++;
+                }
+            }
+        }
+
+        private void BallReset(Ball ball)
+        {
+            ball.Position = new Vector2(392, 232);
+            ball.Velocity = new Vector2((float)((random.Next(0,2) - 0.5) * 4), (float)(random.NextDouble() - 0.5) * 4);
+        }
+
+        private void DrawScore()
+        {
+            spriteBatch.DrawString(font, player1Score.ToString(), player1.Position + new Vector2(50, 56), Color.White);
+            spriteBatch.DrawString(font, player2Score.ToString(), player2.Position + new Vector2(-50, 56), Color.White);
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoutersRevenge", "WoutersRevenge\WoutersRevenge\WoutersRevenge.csproj", "{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WoutersRevengeContent", "WoutersRevenge\WoutersRevengeContent\WoutersRevengeContent.contentproj", "{50186202-D99D-4FE8-857A-4BFD73CB3F2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}.Debug|x86.ActiveCfg = Debug|x86
+		{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}.Debug|x86.Build.0 = Debug|x86
+		{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}.Release|x86.ActiveCfg = Release|x86
+		{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}.Release|x86.Build.0 = Release|x86
+		{50186202-D99D-4FE8-857A-4BFD73CB3F2C}.Debug|x86.ActiveCfg = Debug|x86
+		{50186202-D99D-4FE8-857A-4BFD73CB3F2C}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

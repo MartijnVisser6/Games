@@ -16,3 +16,13 @@ Game1/Game1/Game1/bin/x86/Debug/Content/SpriteFont1.xnb
 *.dll
 *.pdb
 
+WoutersRevenge/WoutersRevenge/WoutersRevenge/obj/x86/Debug
+WoutersRevenge/WoutersRevenge/WoutersRevenge/obj/x86/Release
+*/Debug
+*.exe
+*.cache
+WoutersRevenge/WoutersRevenge/WoutersRevengeContent/obj/x86/Debug/WoutersRevengeContent.contentproj.FileListAbsolute.txt
+*.cachefile
+*.cache
+*.cache
+GameEngine/obj/x86/Debug/GameEngine.csprojResolveAssemblyReference.cache

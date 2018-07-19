@@ -17,8 +17,6 @@ namespace GameEngine
         public Vector2 Velocity { get; set; }
         private Texture2D _mTexture;
 
-
-
         public GameObject(Texture2D texture, Vector2 position)
         {
             _mTexture = texture;

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoutersRevenge", "WoutersRe
 EndProject
 Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WoutersRevengeContent", "WoutersRevenge\WoutersRevengeContent\WoutersRevengeContent.contentproj", "{50186202-D99D-4FE8-857A-4BFD73CB3F2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "..\GameEngine\GameEngine.csproj", "{82495041-6D88-4DDB-AAB3-88A63E3C823B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}.Release|x86.Build.0 = Release|x86
 		{50186202-D99D-4FE8-857A-4BFD73CB3F2C}.Debug|x86.ActiveCfg = Debug|x86
 		{50186202-D99D-4FE8-857A-4BFD73CB3F2C}.Release|x86.ActiveCfg = Release|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Debug|x86.ActiveCfg = Debug|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Debug|x86.Build.0 = Debug|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.ActiveCfg = Release|x86
+		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

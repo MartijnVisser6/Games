@@ -79,6 +79,10 @@ namespace WoutersRevenge
                 this.Exit();
 
             // TODO: Add your update logic here
+            player.Update(gameTime);
+
+            //Update gravity
+            UpdateGravity();
 
             base.Update(gameTime);
         }
@@ -96,6 +100,17 @@ namespace WoutersRevenge
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void UpdateGravity()
+        {
+            if (player.Position.Y > 900 - 32)
+            {
+                player.Position = new Vector2(player.Position.X, 900 - 32);
+                player.Velocity = new Vector2(0, 0);
+            }
+            else
+                player.Velocity += new Vector2(0, 0.1f);
         }
     }
 }

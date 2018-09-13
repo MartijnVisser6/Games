@@ -15,11 +15,12 @@ namespace GameEngine
     {
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
-        private Texture2D _mTexture;
+        public Texture2D Texture { get; set; }
+        public ObjectType ObjectType { get; set; }
 
         public GameObject(Texture2D texture, Vector2 position)
         {
-            _mTexture = texture;
+            Texture = texture;
             Position = position;
         }
 
@@ -30,12 +31,12 @@ namespace GameEngine
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_mTexture, Position, Color.White);
+            spriteBatch.Draw(Texture, Position, Color.White);
         }
 
         public Rectangle GetBoundingBox()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, _mTexture.Width, _mTexture.Height);
+            return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
         }
 
         public bool CheckCollision(GameObject obj)

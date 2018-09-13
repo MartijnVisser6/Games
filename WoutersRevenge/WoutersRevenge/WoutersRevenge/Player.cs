@@ -15,6 +15,7 @@ namespace WoutersRevenge
         public Player(Vector2 position) : base(ContentLoader.LoadSprite("wouterv1"), position)
         {
             previousKs = Keyboard.GetState();
+            ObjectType = GameEngine.ObjectType.Dynamic;
         }
 
         public override void Update(GameTime gameTime)
@@ -38,10 +39,16 @@ namespace WoutersRevenge
 
             if (ks.IsKeyDown(Keys.W) && !previousKs.IsKeyDown(Keys.W) || ks.IsKeyDown(Keys.Space) && !previousKs.IsKeyDown(Keys.Space))
             {
-                this.Velocity += new Vector2(0, -Globals.PLAYER_JUMP);
+                if(CanJump())
+                    this.Velocity += new Vector2(0, -Globals.PLAYER_JUMP);
             }
 
             previousKs = ks;
+        }
+
+        private bool CanJump()
+        {
+            return this.Position.Y + this.Texture.Height >= Globals.SCREEN_HEIGHT;
         }
     }
 }

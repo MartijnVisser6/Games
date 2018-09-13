@@ -20,14 +20,15 @@ namespace WoutersRevenge
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
+        List<Platform> platforms;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferWidth = Globals.SCREEN_WIDTH;
+            graphics.PreferredBackBufferHeight = Globals.SCREEN_HEIGHT;
             graphics.ApplyChanges();
         }
 
@@ -55,7 +56,9 @@ namespace WoutersRevenge
 
             ContentLoader.Content = Content;
             player = new Player(new Vector2(0, 0));
-            // TODO: use this.Content to load your game content here
+            platforms = new List<Platform>();
+
+            platforms.Add(new Platform(new Vector2(300, 800)));
         }
 
         /// <summary>
@@ -83,6 +86,7 @@ namespace WoutersRevenge
 
             //Update gravity
             UpdateGravity();
+            HandleCollisions();
 
             base.Update(gameTime);
         }
@@ -96,6 +100,8 @@ namespace WoutersRevenge
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             player.Draw(spriteBatch);
+            foreach (Platform p in platforms)
+                p.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
@@ -104,13 +110,54 @@ namespace WoutersRevenge
 
         private void UpdateGravity()
         {
-            if (player.Position.Y > 900 - 32)
+            if (player.Position.Y >= 900 - 32)
             {
                 player.Position = new Vector2(player.Position.X, 900 - 32);
                 player.Velocity = new Vector2(0, 0);
             }
             else
                 player.Velocity += new Vector2(0, 0.1f);
+        }
+
+        private void HandleCollisions()
+        {
+            Rectangle playerBoundingbox = player.GetBoundingBox();
+
+            foreach(Platform p in platforms)
+            {
+                if(p.CheckCollision(player))
+                {
+                    Rectangle platformBoundingbox = p.GetBoundingBox();
+
+                    // Player is hitting the left side of the platform
+                    if(playerBoundingbox.Left < platformBoundingbox.Left)
+                    {
+                        player.Position = new Vector2(platformBoundingbox.Left - playerBoundingbox.Width, player.Position.Y);
+                    }
+                    else if (playerBoundingbox.Right > platformBoundingbox.Right)
+                    {
+                        player.Position = new Vector2(platformBoundingbox.Right, player.Position.Y);
+                    }
+
+                    playerBoundingbox = player.GetBoundingBox();
+
+                    if (p.CheckCollision(player))
+                    {
+                        // Player is below platform
+                        if (playerBoundingbox.Top > platformBoundingbox.Top)
+                        {
+                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Bottom);
+                            player.Velocity = new Vector2(0, 0);
+                        }
+                        // Player is above platform
+                        else if (playerBoundingbox.Bottom < platformBoundingbox.Bottom)
+                        {
+                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Top - (playerBoundingbox.Height - 1));
+                            player.Velocity = new Vector2(0, 0);
+                        }
+                    }
+                }
+            }
         }
     }
 }

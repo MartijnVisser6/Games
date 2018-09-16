@@ -10,7 +10,9 @@ namespace WoutersRevenge
 {
     public class Player : GameObject
     {
-        KeyboardState previousKs;
+        public Vector2 PreviousPosition { get; set; }
+
+        KeyboardState previousKs;       
 
         public Player(Vector2 position) : base(ContentLoader.LoadSprite("wouterv1"), position)
         {
@@ -20,6 +22,7 @@ namespace WoutersRevenge
 
         public override void Update(GameTime gameTime)
         {
+            PreviousPosition = this.Position;
             HandleInput();
             base.Update(gameTime);
         }

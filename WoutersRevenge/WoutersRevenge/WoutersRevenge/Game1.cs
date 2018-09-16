@@ -55,7 +55,7 @@ namespace WoutersRevenge
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ContentLoader.Content = Content;
-            player = new Player(new Vector2(0, 0));
+            player = new Player(new Vector2(0, 900));
             platforms = new List<Platform>();
 
             platforms.Add(new Platform(new Vector2(300, 800)));
@@ -125,37 +125,87 @@ namespace WoutersRevenge
 
             foreach(Platform p in platforms)
             {
-                if(p.CheckCollision(player))
+                if (p.CheckCollision(player))
                 {
                     Rectangle platformBoundingbox = p.GetBoundingBox();
 
-                    // Player is hitting the left side of the platform
-                    if(playerBoundingbox.Left < platformBoundingbox.Left)
+                    Vector2 positionVector = player.PreviousPosition - player.Position;
+                    float xDiff = 0f;
+                    float yDiff = 0f;
+                    float playerBoundingBoxX = 0, playerBoundingBoxY = 0;
+                    float platformBoundingBoxX = 0, platformBoundingBoxY = 0;
+
+                    if (positionVector.X > 0)
                     {
-                        player.Position = new Vector2(platformBoundingbox.Left - playerBoundingbox.Width, player.Position.Y);
+                        playerBoundingBoxX = playerBoundingbox.Left;
+                        platformBoundingBoxX = platformBoundingbox.Right;
                     }
-                    else if (playerBoundingbox.Right > platformBoundingbox.Right)
+                    else if (positionVector.X < 0)
                     {
-                        player.Position = new Vector2(platformBoundingbox.Right, player.Position.Y);
+                        playerBoundingBoxX = playerBoundingbox.Right;
+                        platformBoundingBoxX = platformBoundingbox.Left;
                     }
 
-                    playerBoundingbox = player.GetBoundingBox();
-
-                    if (p.CheckCollision(player))
+                    if (positionVector.Y > 0)
                     {
-                        // Player is below platform
-                        if (playerBoundingbox.Top > platformBoundingbox.Top)
-                        {
-                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Bottom);
-                            player.Velocity = new Vector2(0, 0);
-                        }
-                        // Player is above platform
-                        else if (playerBoundingbox.Bottom < platformBoundingbox.Bottom)
-                        {
-                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Top - (playerBoundingbox.Height - 1));
-                            player.Velocity = new Vector2(0, 0);
-                        }
+                        playerBoundingBoxY = playerBoundingbox.Top;
+                        platformBoundingBoxY = platformBoundingbox.Bottom;
                     }
+                    else if (positionVector.Y < 0)
+                    {
+                        playerBoundingBoxY = playerBoundingbox.Bottom;
+                        platformBoundingBoxY = platformBoundingbox.Top;
+                    }
+
+                    xDiff = platformBoundingBoxX - playerBoundingBoxX;
+                    yDiff = platformBoundingBoxY - playerBoundingBoxY;
+
+                    float xDiv = float.MaxValue;
+                    float yDiv = float.MaxValue;
+
+                    if(xDiff != 0)
+                        xDiv = xDiff / positionVector.X;
+                    if(yDiff != 0)
+                        yDiv = yDiff / positionVector.Y;
+
+                    if (xDiv < yDiv)
+                    {
+                        player.Position += new Vector2((float)Math.Round(xDiv * positionVector.X), xDiv * positionVector.Y);
+                    }
+                    else
+                    {
+                        player.Position += new Vector2(yDiv * positionVector.X, (float)Math.Round(yDiv * positionVector.Y));
+                    }
+
+                    //player.Velocity = new Vector2(0, 0);
+
+                    //// Player is hitting the left side of the platform
+                    //if (playerBoundingbox.Left < platformBoundingbox.Left)
+                    //{
+                    //    player.Position = new Vector2(platformBoundingbox.Left - playerBoundingbox.Width, player.Position.Y);
+                    //}
+                    //else if (playerBoundingbox.Right > platformBoundingbox.Right)
+                    //{
+                    //    player.Position = new Vector2(platformBoundingbox.Right, player.Position.Y);
+                    //}
+
+                    //playerBoundingbox = player.GetBoundingBox();
+
+                    //if (p.CheckCollision(player))
+                    //{
+                    //    // Player is below platform
+                    //    if (playerBoundingbox.Top > platformBoundingbox.Top)
+                    //    {
+                    //        player.Position = new Vector2(player.Position.X, platformBoundingbox.Bottom);
+                    //        player.Velocity = new Vector2(0, 0);
+                    //    }
+                    //    // Player is above platform
+                    //    else if (playerBoundingbox.Bottom < platformBoundingbox.Bottom)
+                    //    {
+                    //        player.Position = new Vector2(player.Position.X, platformBoundingbox.Top - (playerBoundingbox.Height - 1));
+                    //        player.Velocity = new Vector2(0, 0);
+                    //    }
+                    //}
                 }
             }
         }

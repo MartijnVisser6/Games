@@ -64,6 +64,7 @@ namespace WoutersRevenge
             };
 
             player = new Player(new Vector2(0, 700));
+           
             platforms = new List<GameObject>();
             finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850));
           
@@ -78,6 +79,7 @@ namespace WoutersRevenge
             platforms.Add(new Platform(new Vector2(400, 868 - 96)));
             scene1.Add(player);
             scene1.Add(platforms);
+            scene1.Add(new Enemy(new Vector2(500, 700)));
         }
 
         /// <summary>s

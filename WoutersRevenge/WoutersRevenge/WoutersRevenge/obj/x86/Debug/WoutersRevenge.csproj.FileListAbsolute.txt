@@ -39,3 +39,4 @@ D:\GamesWithBosk\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debu
 C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\wouterv1.xnb
 C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\platformBlock.xnb
 C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\BiggerWouter.xnb
+D:\GamesWithBosk\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\BiggerWouter.xnb

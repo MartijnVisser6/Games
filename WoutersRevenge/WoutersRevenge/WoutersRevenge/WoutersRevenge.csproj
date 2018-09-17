@@ -57,6 +57,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="ObjectType.cs" />
     <Compile Include="Platform.cs" />

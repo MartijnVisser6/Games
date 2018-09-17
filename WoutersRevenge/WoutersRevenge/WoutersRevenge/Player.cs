@@ -13,7 +13,7 @@ namespace WoutersRevenge
 
         KeyboardState previousKs;       
 
-        public Player(Vector2 position) : base(ContentLoader.LoadSprite("wouterv1"), position)
+        public Player(Vector2 position) : base(ContentLoader.LoadSprite("BiggerWouter"), position)
         {
             previousKs = Keyboard.GetState();
             ObjectType = GameEngine.ObjectType.Dynamic;

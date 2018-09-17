@@ -63,26 +63,19 @@ namespace WoutersRevenge
                 Gravity = new Vector2(0f, 0.1f),
             };
 
-            player = new Player(new Vector2(0, 800));
+            player = new Player(new Vector2(0, 700));
             platforms = new List<GameObject>();
             finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850));
+          
 
-            platforms.Add(new Platform(new Vector2(300, 768)));
-            platforms.Add(new Platform(new Vector2(300, 800)));
-            platforms.Add(new Platform(new Vector2(400, 800)));
-            platforms.Add(new Platform(new Vector2(432, 800)));
-            platforms.Add(new Platform(new Vector2(480, 800)));
-
-            platforms.Add(new Platform(new Vector2(400, 700)));
-            platforms.Add(new Platform(new Vector2(432, 700)));
-            platforms.Add(new Platform(new Vector2(464, 668)));
-            platforms.Add(new Platform(new Vector2(464, 700)));
-
-            for(int i = 0; i < 20; i++)
+            for(int i = 0; i < 60; i++)
             {
-                platforms.Add(new Platform(new Vector2(0 + 32 * i, 900)));
+                platforms.Add(new Platform(new Vector2(0 + 32 * i, 868)));
             }
 
+            platforms.Add(new Platform(new Vector2(400, 868 - 32)));
+            platforms.Add(new Platform(new Vector2(400, 868 - 64)));
+            platforms.Add(new Platform(new Vector2(400, 868 - 96)));
             scene1.Add(player);
             scene1.Add(platforms);
         }

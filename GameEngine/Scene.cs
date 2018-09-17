@@ -62,7 +62,6 @@ namespace GameEngine
             
             HandleCollisions();
             UpdateGravity();
-            //HandleVelocity();
         }
 
         private void UpdateGravity()
@@ -152,43 +151,7 @@ namespace GameEngine
                     }
                 }
             }
-        }
-
-        private void HandleVelocity()
-        {           
-            foreach (GameObject objDynamic in _mGameObjectsDynamic)
-            {
-                objDynamic.IsOnGround = false;
-                foreach (GameObject objStatic in _mGameObjectsStatic)
-                {
-                    Rectangle objStaticBoundingBox = objStatic.GetBoundingBox();
-
-                    if (objDynamic.Velocity.Y >= 0)
-                    {
-                        Rectangle playerBoundingBoxJump = objDynamic.GetBoundingBox();
-                        playerBoundingBoxJump.Offset(0, 1);
-                        if (playerBoundingBoxJump.Intersects(objStaticBoundingBox))
-                            objDynamic.IsOnGround = true;
-                    }
-
-                    if (objDynamic.Velocity.Y > 0)
-                    {
-                        Rectangle playerBoundingBoxDown = objDynamic.GetBoundingBox();
-                        playerBoundingBoxDown.Offset(0, 1);
-                        if (playerBoundingBoxDown.Intersects(objStaticBoundingBox))
-                            objDynamic.Velocity = new Vector2(0, 0);
-                    }
-                    else if (objDynamic.Velocity.Y < 0)
-                    {
-                        Rectangle playerBoundingBoxUp = objDynamic.GetBoundingBox();
-                        playerBoundingBoxUp.Offset(0, -1);
-                        if (playerBoundingBoxUp.Intersects(objStaticBoundingBox))
-                            objDynamic.Velocity = new Vector2(0, 0);
-                    }
-                }
-            }
-           // UpdateGravity();
-        }
+        }       
 
         private bool CheckColissionDirectionally(GameObject obj, Vector2 direction)
         {

@@ -21,6 +21,7 @@ namespace WoutersRevenge
         SpriteBatch spriteBatch;
         Player player;
         List<Platform> platforms;
+        GameObject finishPoint;
 
         public Game1()
         {
@@ -30,6 +31,7 @@ namespace WoutersRevenge
             graphics.PreferredBackBufferWidth = Globals.SCREEN_WIDTH;
             graphics.PreferredBackBufferHeight = Globals.SCREEN_HEIGHT;
             graphics.ApplyChanges();
+            
         }
 
         /// <summary>
@@ -57,8 +59,11 @@ namespace WoutersRevenge
             ContentLoader.Content = Content;
             player = new Player(new Vector2(0, 900));
             platforms = new List<Platform>();
+            finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850));
 
-            
+
+
+
             platforms.Add(new Platform(new Vector2(300, 768)));
             platforms.Add(new Platform(new Vector2(300, 800)));
             platforms.Add(new Platform(new Vector2(400, 800)));
@@ -98,6 +103,7 @@ namespace WoutersRevenge
             //Update gravity
             UpdateGravity();
             HandleCollisions();
+            if (CheckWin()) Console.WriteLine("You win..");
 
             base.Update(gameTime);
         }
@@ -113,8 +119,10 @@ namespace WoutersRevenge
             player.Draw(spriteBatch);
             foreach (Platform p in platforms)
                 p.Draw(spriteBatch);
+            finishPoint.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
+            
 
             base.Draw(gameTime);
         }
@@ -134,6 +142,7 @@ namespace WoutersRevenge
                 
         }
 
+        //Collisions between player and platforms.
         private void HandleCollisions()
         {          
             player.CanPlayerJump = false;
@@ -228,6 +237,18 @@ namespace WoutersRevenge
                         player.Velocity = new Vector2(0, 0);
                 }
             }
+        }
+
+        private bool CheckWin()
+        {
+            Rectangle playerBoundingbox = player.GetBoundingBox();
+            Rectangle winCheck = finishPoint.GetBoundingBox();
+
+            if (playerBoundingbox.Intersects(winCheck))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

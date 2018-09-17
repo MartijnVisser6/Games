@@ -14,18 +14,26 @@ namespace GameEngine
     public class GameObject
     {
         public Vector2 Position { get; set; }
+        public Vector2 PreviousPosition { get; set; }
         public Vector2 Velocity { get; set; }
-        public Texture2D Texture { get; set; }
+        public Texture2D Texture { get; set; }        
         public ObjectType ObjectType { get; set; }
+        public bool IsOnGround { get; set; }
 
         public GameObject(Texture2D texture, Vector2 position)
         {
             Texture = texture;
             Position = position;
+            PreviousPosition = position;
+        }
+
+        public virtual void PreUpdate(GameTime gameTime)
+        {
+            PreviousPosition = Position;
         }
 
         public virtual void Update(GameTime gameTime)
-        {
+        {            
             Position += Velocity * ((gameTime.ElapsedGameTime.Milliseconds / 1000.0f) * 60);
         }
 

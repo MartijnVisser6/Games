@@ -10,8 +10,6 @@ namespace WoutersRevenge
 {
     public class Player : GameObject
     {
-        public Vector2 PreviousPosition { get; set; }
-        public bool CanPlayerJump { get; set; }
 
         KeyboardState previousKs;       
 
@@ -23,7 +21,6 @@ namespace WoutersRevenge
 
         public override void Update(GameTime gameTime)
         {
-            PreviousPosition = this.Position;
             HandleInput();
             base.Update(gameTime);
         }
@@ -52,7 +49,7 @@ namespace WoutersRevenge
 
         private bool CanJump()
         {
-            return this.Position.Y + this.Texture.Height >= Globals.SCREEN_HEIGHT || this.CanPlayerJump;
+            return this.IsOnGround;
         }
     }
 }

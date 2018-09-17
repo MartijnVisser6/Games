@@ -58,7 +58,18 @@ namespace WoutersRevenge
             player = new Player(new Vector2(0, 900));
             platforms = new List<Platform>();
 
+            
+            platforms.Add(new Platform(new Vector2(300, 768)));
             platforms.Add(new Platform(new Vector2(300, 800)));
+            platforms.Add(new Platform(new Vector2(400, 800)));
+            platforms.Add(new Platform(new Vector2(432, 800)));
+            platforms.Add(new Platform(new Vector2(480, 800)));
+
+            platforms.Add(new Platform(new Vector2(400, 700)));
+            platforms.Add(new Platform(new Vector2(432, 700)));
+            platforms.Add(new Platform(new Vector2(464, 668)));
+            platforms.Add(new Platform(new Vector2(464, 700)));
+            
         }
 
         /// <summary>
@@ -116,19 +127,23 @@ namespace WoutersRevenge
                 player.Velocity = new Vector2(0, 0);
             }
             else
-                player.Velocity += new Vector2(0, 0.1f);
+            {
+                if(!player.CanPlayerJump)
+                    player.Velocity += new Vector2(0, 0.1f);
+            }
+                
         }
 
         private void HandleCollisions()
-        {
-            Rectangle playerBoundingbox = player.GetBoundingBox();
+        {          
+            player.CanPlayerJump = false;
 
-            foreach(Platform p in platforms)
+            foreach (Platform p in platforms)
             {
-                if (p.CheckCollision(player))
-                {
-                    Rectangle platformBoundingbox = p.GetBoundingBox();
-
+                Rectangle playerBoundingbox = player.GetBoundingBox();
+                Rectangle platformBoundingbox = p.GetBoundingBox();
+                if (playerBoundingbox.Intersects(platformBoundingbox))
+                {     
                     Vector2 positionVector = player.PreviousPosition - player.Position;
                     float xDiff = 0f;
                     float yDiff = 0f;
@@ -170,42 +185,47 @@ namespace WoutersRevenge
 
                     if (xDiv < yDiv)
                     {
-                        player.Position += new Vector2((float)Math.Round(xDiv * positionVector.X), xDiv * positionVector.Y);
+                        if(xDiff < 0)
+                            player.Position = new Vector2(platformBoundingbox.Left - player.Texture.Width, player.Position.Y);
+                        else if(xDiff > 0)
+                            player.Position = new Vector2((platformBoundingbox.Right), player.Position.Y);
                     }
                     else
                     {
-                        player.Position += new Vector2(yDiv * positionVector.X, (float)Math.Round(yDiv * positionVector.Y));
+                        if (yDiff < 0)
+                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Top - player.Texture.Height);
+                        else if (yDiff > 0)
+                            player.Position = new Vector2(player.Position.X, platformBoundingbox.Bottom);
                     }
+                } 
+            }
 
-                    //player.Velocity = new Vector2(0, 0);
 
-                    //// Player is hitting the left side of the platform
-                    //if (playerBoundingbox.Left < platformBoundingbox.Left)
-                    //{
-                    //    player.Position = new Vector2(platformBoundingbox.Left - playerBoundingbox.Width, player.Position.Y);
-                    //}
-                    //else if (playerBoundingbox.Right > platformBoundingbox.Right)
-                    //{
-                    //    player.Position = new Vector2(platformBoundingbox.Right, player.Position.Y);
-                    //}
+            foreach (Platform p in platforms)
+            {
+                Rectangle platformBoundingbox = p.GetBoundingBox();
 
-                    //playerBoundingbox = player.GetBoundingBox();
+                if (player.Velocity.Y >= 0)
+                {
+                    Rectangle playerBoundingBoxJump = player.GetBoundingBox();
+                    playerBoundingBoxJump.Offset(0, 1);
+                    if (playerBoundingBoxJump.Intersects(platformBoundingbox))
+                        player.CanPlayerJump = true;
+                }
 
-                    //if (p.CheckCollision(player))
-                    //{
-                    //    // Player is below platform
-                    //    if (playerBoundingbox.Top > platformBoundingbox.Top)
-                    //    {
-                    //        player.Position = new Vector2(player.Position.X, platformBoundingbox.Bottom);
-                    //        player.Velocity = new Vector2(0, 0);
-                    //    }
-                    //    // Player is above platform
-                    //    else if (playerBoundingbox.Bottom < platformBoundingbox.Bottom)
-                    //    {
-                    //        player.Position = new Vector2(player.Position.X, platformBoundingbox.Top - (playerBoundingbox.Height - 1));
-                    //        player.Velocity = new Vector2(0, 0);
-                    //    }
-                    //}
+                if (player.Velocity.Y > 0)
+                {
+                    Rectangle playerBoundingBoxDown = player.GetBoundingBox();
+                    playerBoundingBoxDown.Offset(0, 1);
+                    if (playerBoundingBoxDown.Intersects(platformBoundingbox))
+                        player.Velocity = new Vector2(0, 0);
+                }
+                else if (player.Velocity.Y < 0)
+                {
+                    Rectangle playerBoundingBoxUp = player.GetBoundingBox();
+                    playerBoundingBoxUp.Offset(0, -1);
+                    if (playerBoundingBoxUp.Intersects(platformBoundingbox))
+                        player.Velocity = new Vector2(0, 0);
                 }
             }
         }

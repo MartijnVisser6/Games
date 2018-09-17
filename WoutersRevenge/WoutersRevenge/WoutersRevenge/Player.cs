@@ -11,6 +11,7 @@ namespace WoutersRevenge
     public class Player : GameObject
     {
         public Vector2 PreviousPosition { get; set; }
+        public bool CanPlayerJump { get; set; }
 
         KeyboardState previousKs;       
 
@@ -51,7 +52,7 @@ namespace WoutersRevenge
 
         private bool CanJump()
         {
-            return this.Position.Y + this.Texture.Height >= Globals.SCREEN_HEIGHT;
+            return this.Position.Y + this.Texture.Height >= Globals.SCREEN_HEIGHT || this.CanPlayerJump;
         }
     }
 }

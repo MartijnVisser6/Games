@@ -36,7 +36,7 @@ namespace GameEngine
 
         public Rectangle GetBoundingBox()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+            return new Rectangle((int)Math.Round(Position.X), (int)Math.Round(Position.Y), Texture.Width, Texture.Height);
         }
 
         public bool CheckCollision(GameObject obj)

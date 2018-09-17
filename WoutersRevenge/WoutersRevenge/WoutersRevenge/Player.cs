@@ -10,7 +10,6 @@ namespace WoutersRevenge
 {
     public class Player : GameObject
     {
-
         KeyboardState previousKs;       
 
         public Player(Vector2 position) : base(ContentLoader.LoadSprite("BiggerWouter"), position)
@@ -22,6 +21,7 @@ namespace WoutersRevenge
         public override void Update(GameTime gameTime)
         {
             HandleInput();
+            CheckCollisionWithEnemy();
             base.Update(gameTime);
         }
 
@@ -48,8 +48,23 @@ namespace WoutersRevenge
         }
 
         private bool CanJump()
-        {
+        {            
             return this.IsOnGround;
         }
+
+        private void CheckCollisionWithEnemy()
+        {
+            foreach(GameObject obj in Collisions)
+            {
+                if(obj is Enemy)
+                {
+                    Console.WriteLine("Hit enemy!");
+                }
+            }
+                
+        }
+
+
+
     }
 }

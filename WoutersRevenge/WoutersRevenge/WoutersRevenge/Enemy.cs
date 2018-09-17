@@ -11,12 +11,12 @@ namespace WoutersRevenge
     {
         public Enemy(Vector2 position) : base(ContentLoader.LoadSprite("Enemy1"), position)
         {
-            ObjectType = GameEngine.ObjectType.Static;
+            ObjectType = GameEngine.ObjectType.Dynamic;
         }
 
         private void MoveLeft()
         {
-            Position -= new Vector2(.1f, 0);
+            Position -= new Vector2(1f, 0);
         }
 
         public override void Update(GameTime gameTime)

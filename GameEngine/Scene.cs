@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,19 @@ namespace GameEngine
             
             HandleCollisions();
             UpdateGravity();
+            GenerateCollisionLists();
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (GameObject gameObject in _mGameObjectsDynamic)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+            foreach (GameObject gameObject in _mGameObjectsStatic)
+            {
+                gameObject.Draw(spriteBatch);
+            }
         }
 
         private void UpdateGravity()
@@ -174,6 +188,25 @@ namespace GameEngine
             }
 
             return false;
+        }
+
+        private void GenerateCollisionLists()
+        {
+            foreach(GameObject obj in _mGameObjectsDynamic)
+            {
+                obj.Collisions.Clear();
+
+                foreach (GameObject obj2 in _mGameObjectsDynamic)
+                {
+                    if(obj != obj2)
+                    {
+                        if (obj.CheckCollision(obj2))
+                        {
+                            obj.Collisions.Add(obj2);
+                        }
+                    }
+                }
+            }
         }
     }
 }

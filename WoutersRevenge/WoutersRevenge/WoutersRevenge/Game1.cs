@@ -25,6 +25,7 @@ namespace WoutersRevenge
         Scene scene1;
         Enemy enemy;
         Dictionary<string, Scene> sceneDic = new Dictionary<string, Scene>();
+        PlayerHealth playerHealth;
         string activeScene;
 
         public Game1()
@@ -101,6 +102,12 @@ namespace WoutersRevenge
             scene2.Add(new Enemy(new Vector2(1500, 700)));
             scene2.Add(finishPoint);
             sceneDic.Add("lvl2", scene2);
+
+
+            //UI
+            Texture2D SimpleTexture = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            SimpleTexture.SetData(new[] { Color.White });
+            playerHealth = new PlayerHealth(new Vector2(0, 0), player, SimpleTexture);
         }
 
         /// <summary>s
@@ -119,24 +126,19 @@ namespace WoutersRevenge
                 this.Exit();
 
             sceneDic[activeScene].Update(gameTime);
-            
-            //scene1.Update(gameTime);
 
             if (CheckWin()) activeScene = "lvl2";
-
+            if (!CheckAlive()) Exit();
+            playerHealth.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Blue);
             spriteBatch.Begin();
-            //player.Draw(spriteBatch);
-            //foreach (Platform p in platforms)
-            //    p.Draw(spriteBatch);
-            //finishPoint.Draw(spriteBatch);
-            //enemy.Draw(spriteBatch);
             sceneDic[activeScene].Draw(spriteBatch);
+            playerHealth.Draw(spriteBatch);
             spriteBatch.End();           
 
             base.Draw(gameTime);
@@ -152,6 +154,16 @@ namespace WoutersRevenge
                 return true;
             }
             return false;
+        }
+
+        private bool CheckAlive()
+        {
+            if (player.alive == false)
+            {
+                Console.WriteLine("DEAD");
+                return false;
+            }
+            return true;
         }
     }
 }

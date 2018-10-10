@@ -1,5 +1,6 @@
 ﻿using GameEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,27 @@ namespace WoutersRevenge
 {
     public class Player : GameObject
     {
-        KeyboardState previousKs;       
+        KeyboardState previousKs;
+        public int playerHealth = 5000;
+        public Boolean alive = true;
+        
+        Rectangle healthBar;
+
 
         public Player(Vector2 position) : base(ContentLoader.LoadSprite("BiggerWouter"), position)
         {
             previousKs = Keyboard.GetState();
             ObjectType = GameEngine.ObjectType.Dynamic;
+            healthBar = new Rectangle(100, 100, playerHealth, 20);
+           
         }
 
         public override void Update(GameTime gameTime)
         {
             HandleInput();
             CheckCollisionWithEnemy();
+            CheckPlayerHealth();
+
             base.Update(gameTime);
         }
 
@@ -58,11 +68,23 @@ namespace WoutersRevenge
             {
                 if(obj is Enemy)
                 {
-                    Console.WriteLine("Hit enemy!");
+                    playerHealth -= 25;
+                    Console.WriteLine(playerHealth);
                 }
             }
                 
         }
+
+        private void CheckPlayerHealth()
+        {
+            if(playerHealth <= 0)
+            {
+                
+                alive = false;
+            }
+        }
+
+        
 
 
 

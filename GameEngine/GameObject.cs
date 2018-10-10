@@ -39,7 +39,7 @@ namespace GameEngine
             Position += Velocity * ((gameTime.ElapsedGameTime.Milliseconds / 1000.0f) * 60);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color.White);
         }

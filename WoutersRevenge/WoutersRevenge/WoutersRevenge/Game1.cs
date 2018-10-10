@@ -61,46 +61,57 @@ namespace WoutersRevenge
             spriteBatch = new SpriteBatch(GraphicsDevice);
             activeScene = "lvl1";
             ContentLoader.Content = Content;
-            scene1 = new Scene()
-            {
-                Gravity = new Vector2(0f, 0.1f),
-            };
+            //scene1 = new Scene()
+            //{
+            //    Gravity = new Vector2(0f, 0.1f),
+            //};
 
-            player = new Player(new Vector2(0, 700));
-           
-            platforms = new List<GameObject>();
+            //player = new Player(new Vector2(0, 700));
+
+            //platforms = new List<GameObject>();
+            //finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850))
+            //{
+            //    ObjectType = GameEngine.ObjectType.Dynamic,
+            //};
+            //enemy = new Enemy(new Vector2(1500, 700));
+
+            //for(int i = 0; i < 60; i++)
+            //{
+            //    platforms.Add(new Platform(new Vector2(0 + 32 * i, 868)));
+            //}
+
+
+            //scene1.Add(player);
+            //scene1.Add(platforms);
+            //scene1.Add(enemy);
+            //scene1.Add(finishPoint);
+            //sceneDic.Add("lvl1", scene1);
+
+            //platforms.Add(new Platform(new Vector2(400, 868 - 32)));
+            //platforms.Add(new Platform(new Vector2(400, 868 - 64)));
+            //platforms.Add(new Platform(new Vector2(400, 868 - 96)));
+
+            //Scene scene2 = new Scene()
+            //{
+            //    Gravity = new Vector2(0, 0.1f),
+            //};
+
+            //scene2.Add(new Player(new Vector2(0, 700)));
+            //scene2.Add(platforms);
+            //scene2.Add(new Enemy(new Vector2(1500, 700)));
+            //scene2.Add(finishPoint);
+            //sceneDic.Add("lvl2", scene2);
+            LevelImporter importer = new LevelImporter();
+            Scene scene1 = importer.Import("../../../lvl1.txt");
+            scene1.Gravity = new Vector2(0, 0.1f);
+            player = new Player(importer.StartLocation);
+            scene1.Add(player);
             finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850))
             {
                 ObjectType = GameEngine.ObjectType.Dynamic,
             };
-            enemy = new Enemy(new Vector2(1500, 700));
-
-            for(int i = 0; i < 60; i++)
-            {
-                platforms.Add(new Platform(new Vector2(0 + 32 * i, 868)));
-            }
-
-            
-            scene1.Add(player);
-            scene1.Add(platforms);
-            scene1.Add(enemy);
             scene1.Add(finishPoint);
             sceneDic.Add("lvl1", scene1);
-
-            platforms.Add(new Platform(new Vector2(400, 868 - 32)));
-            platforms.Add(new Platform(new Vector2(400, 868 - 64)));
-            platforms.Add(new Platform(new Vector2(400, 868 - 96)));
-
-            Scene scene2 = new Scene()
-            {
-                Gravity = new Vector2(0, 0.1f),
-            };
-
-            scene2.Add(new Player(new Vector2(0, 700)));
-            scene2.Add(platforms);
-            scene2.Add(new Enemy(new Vector2(1500, 700)));
-            scene2.Add(finishPoint);
-            sceneDic.Add("lvl2", scene2);
         }
 
         /// <summary>s
@@ -129,13 +140,8 @@ namespace WoutersRevenge
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Gray);
             spriteBatch.Begin();
-            //player.Draw(spriteBatch);
-            //foreach (Platform p in platforms)
-            //    p.Draw(spriteBatch);
-            //finishPoint.Draw(spriteBatch);
-            //enemy.Draw(spriteBatch);
             sceneDic[activeScene].Draw(spriteBatch);
             spriteBatch.End();           
 

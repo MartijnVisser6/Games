@@ -41,3 +41,4 @@ C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\
 C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\BiggerWouter.xnb
 D:\GamesWithBosk\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\BiggerWouter.xnb
 D:\GamesWithBosk\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\Enemy1.xnb
+C:\Users\martijn\Desktop\Games\WoutersRevenge\WoutersRevenge\WoutersRevenge\bin\x86\Debug\Content\Enemy1.xnb

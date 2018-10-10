@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameEngine;
+using System.IO;
 
 namespace LevelEditor
 {
@@ -60,9 +61,14 @@ namespace LevelEditor
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            textureDict.Add("platform", Content.Load<Texture2D>("platformBlock"));
-            textureDict.Add("test", Content.Load<Texture2D>("Enemy1"));
+            
+            textureDict.Add("platformBlock", Content.Load<Texture2D>("platformBlock"));
+            textureDict.Add("Enemy1", Content.Load<Texture2D>("Enemy1"));
+            textureDict.Add("BiggerWouter", Content.Load<Texture2D>("BiggerWouter"));
+            foreach (string key in textureDict.Keys)
+            {
+                textureDict[key].Name = key;
+            }
 
             activeSprite = textureDict.Keys.First();
         }
@@ -170,7 +176,30 @@ namespace LevelEditor
             }
 
             activeSprite = textureDict.Keys.ElementAt(activeSpriteIndex);
+
+            if(InputHelper.IsButtonReleased(Keys.E))
+            {
+                Export();
+            }
         } 
+
+        public void Export()
+        {
+
+            // Write the string array to a new file named "WriteLines.txt".
+            using (StreamWriter outputFile = new StreamWriter("WriteLines.txt"))
+            {
+                foreach (GameObject obj in gameObjects)
+                {
+                    outputFile.Write(obj.Texture.Name);
+                    outputFile.Write(",");
+                    outputFile.Write(obj.Position.X);
+                    outputFile.Write(",");
+                    outputFile.Write(obj.Position.Y);
+                    outputFile.WriteLine();
+                }                    
+            }
+        }
 
     }
 }

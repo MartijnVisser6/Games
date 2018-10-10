@@ -62,52 +62,24 @@ namespace WoutersRevenge
             spriteBatch = new SpriteBatch(GraphicsDevice);
             activeScene = "lvl1";
             ContentLoader.Content = Content;
-            scene1 = new Scene()
-            {
-                Gravity = new Vector2(0f, 0.1f),
-            };
 
-            player = new Player(new Vector2(0, 700));
-           
-            platforms = new List<GameObject>();
+            LevelImporter importer = new LevelImporter();
+            Scene scene1 = importer.Import("../../../lvl1.txt");
+            scene1.Gravity = new Vector2(0, 0.1f);
+            player = new Player(importer.StartLocation);
+            scene1.Add(player);
             finishPoint = new GameObject(ContentLoader.LoadSprite("wouterv1"), new Vector2(1500, 850))
             {
                 ObjectType = GameEngine.ObjectType.Dynamic,
             };
-            enemy = new Enemy(new Vector2(1500, 700));
-
-            for(int i = 0; i < 60; i++)
-            {
-                platforms.Add(new Platform(new Vector2(0 + 32 * i, 868)));
-            }
-
-            
-            scene1.Add(player);
-            scene1.Add(platforms);
-            scene1.Add(enemy);
             scene1.Add(finishPoint);
             sceneDic.Add("lvl1", scene1);
-
-            platforms.Add(new Platform(new Vector2(400, 868 - 32)));
-            platforms.Add(new Platform(new Vector2(400, 868 - 64)));
-            platforms.Add(new Platform(new Vector2(400, 868 - 96)));
-
-            Scene scene2 = new Scene()
-            {
-                Gravity = new Vector2(0, 0.1f),
-            };
-
-            scene2.Add(new Player(new Vector2(0, 700)));
-            scene2.Add(platforms);
-            scene2.Add(new Enemy(new Vector2(1500, 700)));
-            scene2.Add(finishPoint);
-            sceneDic.Add("lvl2", scene2);
-
 
             //UI
             Texture2D SimpleTexture = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             SimpleTexture.SetData(new[] { Color.White });
             playerHealth = new PlayerHealth(new Vector2(0, 0), player, SimpleTexture);
+
         }
 
         /// <summary>s
@@ -135,7 +107,7 @@ namespace WoutersRevenge
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Blue);
+            GraphicsDevice.Clear(Color.Gray);
             spriteBatch.Begin();
             sceneDic[activeScene].Draw(spriteBatch);
             playerHealth.Draw(spriteBatch);

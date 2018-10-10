@@ -5,9 +5,11 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoutersRevenge", "WoutersRevenge\WoutersRevenge\WoutersRevenge.csproj", "{CD545D2F-5DB8-4CB3-92CC-87DCF41888B0}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WoutersRevengeContent", "WoutersRevenge\WoutersRevengeContent\WoutersRevengeContent.contentproj", "{50186202-D99D-4FE8-857A-4BFD73CB3F2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoutersRevengeContent", "WoutersRevenge\WoutersRevengeContent\WoutersRevengeContent.contentproj", "{50186202-D99D-4FE8-857A-4BFD73CB3F2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "..\GameEngine\GameEngine.csproj", "{82495041-6D88-4DDB-AAB3-88A63E3C823B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelEditor", "..\LevelEditor\LevelEditor\LevelEditor.csproj", "{A9EC708E-94DA-429C-9331-D5D3B2506D55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Debug|x86.Build.0 = Debug|x86
 		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.ActiveCfg = Release|x86
 		{82495041-6D88-4DDB-AAB3-88A63E3C823B}.Release|x86.Build.0 = Release|x86
+		{A9EC708E-94DA-429C-9331-D5D3B2506D55}.Debug|x86.ActiveCfg = Debug|x86
+		{A9EC708E-94DA-429C-9331-D5D3B2506D55}.Debug|x86.Build.0 = Debug|x86
+		{A9EC708E-94DA-429C-9331-D5D3B2506D55}.Release|x86.ActiveCfg = Release|x86
+		{A9EC708E-94DA-429C-9331-D5D3B2506D55}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

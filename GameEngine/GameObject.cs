@@ -49,10 +49,12 @@ namespace GameEngine
 
         public bool CheckCollision(GameObject obj)
         {
-            if (this.GetBoundingBox().Intersects(obj.GetBoundingBox()))
-                return true;
+            return this.GetBoundingBox().Intersects(obj.GetBoundingBox());
+        }
 
-            return false;
+        public bool CheckCollision(Point point)
+        {
+            return this.GetBoundingBox().Contains(point);
         }
     }
 }
